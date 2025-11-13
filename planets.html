@@ -24,21 +24,21 @@
     z-index: 0;
   }
 
-  h1{
-    position:absolute;
-    top:10px;
-    width:100%;
-    text-align:center;
-    font-size:20px;
-    z-index:2;
-    color:#f5f5ff;
-    letter-spacing:1px;
+  h1 {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    z-index: 2;
+    color: #f5f5ff;
+    letter-spacing: 1px;
   }
 
   .scroll-wrapper {
     position: relative;
-    width: 340px;
-    height: 340px;
+    width: 380px;
+    height: 380px;
     overflow-y: scroll;
     border: 2px solid rgba(255,255,255,0.15);
     border-radius: 20px;
@@ -46,41 +46,42 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px 0;
     scroll-behavior: smooth;
     margin: auto;
     z-index: 2;
     background: rgba(255,255,255,0.03);
     box-shadow: 0 0 25px rgba(255,255,255,0.1);
+    padding: 15px;
   }
 
   .scroll-content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
     width: 100%;
-    padding: 15px 0;
   }
 
   .box {
-    width: 270px;
-    background: rgba(255,255,255,0.05);
+    width: 100%;
+    min-height: 120px;
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 14px;
+    border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
-    text-align: center;
-    line-height: 1.5;
-    padding: 15px;
+    text-align: justify;
+    font-size: 15.5px;
+    line-height: 1.7;
+    padding: 20px;
     box-shadow: 0 0 20px rgba(255,255,255,0.08);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.25s, box-shadow 0.25s;
+    white-space: pre-line; /* cümlə aralarındakı boşluqları saxlayır */
   }
 
-  .box:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255,255,255,0.25);
+  .box:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(255,255,255,0.25);
   }
 
   ::-webkit-scrollbar {
@@ -94,14 +95,14 @@
 </head>
 <body>
 <canvas id="stars"></canvas>
-<h1>Bura səninçündür ✨</h1>
+<h1>Firuzə üçün mesajlar ✨</h1>
 
 <div class="scroll-wrapper">
   <div class="scroll-content" id="scrollContent"></div>
 </div>
 
 <script>
-// Qaranlıq galaktika ulduz animasiyası
+// Ulduz animasiyası (qaranlıq galaktika fonu)
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
@@ -153,13 +154,13 @@ window.addEventListener('resize',()=>{
 initStars();
 animateStars();
 
-// Firuzə üçün 
+// Firuzə üçün mesajlar
 const texts = [
-  "İlk olaraq deyim ki çox dolmusan, heç rahat deyilsən. Belə olanda özünlə danış, sual ver gör hardadır məsələ. İnan ki, sən çox güclü birisən. Hər şeyi bacara bilərsən. O qədər inanıram sənə, səndə özünə inan.",
-  "Bir qram da olsa nəyəsə pis olmağın, kiməsə pis olmağın istəyəcəyim son şeydir. Sən çox həyat dolu bir insansan, həqiqətən də. Sakit olduğun müddətcə bir o qədər də insanı rahatladırsan.",
-  "Sən bir pişiyi ayağı ilə itələdiyi üçün 2 gün ağlında qalan insansan. Yəni, Allah haqqı, bu elədiklərinə, düşüncə tərzinə bəzən dilim, ağzım söz tutmur cavab verməyə.",
+  "İlk olaraq deyim ki çox dolmusan, heç rahat deyilsən.\nBelə olanda özünlə danış, sual ver gör hardadır məsələ.\nİnan ki, sən çox güclü birisən.\nHər şeyi bacara bilərsən.\nO qədər inanıram sənə, səndə özünə inan.",
+  "Bir qram da olsa nəyəsə pis olmağın, kiməsə pis olmağın istəyəcəyim son şeydir.\nSən çox həyat dolu bir insansan, həqiqətən də.\nSakit olduğun müddətcə bir o qədər də insanı rahatladırsan.",
+  "Sən bir pişiyi ayağı ilə itələdiyi üçün 2 gün ağlında qalan insansan.\nYəni, Allah haqqı, bu elədiklərinə, düşüncə tərzinə bəzən dilim, ağzım söz tutmur cavab verməyə.",
   "Sən hər şeyin ən yaxşısına layiqsən.",
-  "Bir də hər şeydən önəmli sənsən."
+  "Bir də hər şeydən önəmli — sənsən."
 ];
 
 const container = document.getElementById('scrollContent');
