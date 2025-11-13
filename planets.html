@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qaranlıq Galaktika - Firuzə üçün</title>
+<title>Firuzə üçün Qaranlıq Galaktika</title>
 <style>
   html, body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
     font-family: 'Inter', sans-serif;
     color: #fff;
     background: #000010;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    scroll-behavior: smooth;
   }
 
   canvas#stars {
@@ -25,70 +26,62 @@
   }
 
   h1 {
-    position: absolute;
-    top: 10px;
-    width: 100%;
+    margin-top: 20px;
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
+    color: #f8f8ff;
     z-index: 2;
-    color: #f5f5ff;
+    position: relative;
     letter-spacing: 1px;
   }
 
-  .scroll-wrapper {
+  .content {
     position: relative;
-    width: 380px;
-    height: 380px;
-    overflow-y: scroll;
-    border: 2px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    scroll-behavior: smooth;
-    margin: auto;
     z-index: 2;
-    background: rgba(255,255,255,0.03);
-    box-shadow: 0 0 25px rgba(255,255,255,0.1);
-    padding: 15px;
-  }
-
-  .scroll-content {
+    max-width: 700px;
+    width: 90%;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    width: 100%;
+    gap: 40px;
+    margin: 60px 0 100px;
   }
 
-  .box {
-    width: 100%;
-    min-height: 120px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .message {
+    font-size: 17px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.9);
     text-align: justify;
-    font-size: 15.5px;
-    line-height: 1.7;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(255,255,255,0.08);
-    transition: transform 0.25s, box-shadow 0.25s;
-    white-space: pre-line; /* cümlə aralarındakı boşluqları saxlayır */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1.2s ease;
+    padding: 20px 22px;
+    border-left: 2px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    background: rgba(255,255,255,0.03);
+    box-shadow: 0 0 25px rgba(255,255,255,0.05);
   }
 
-  .box:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 30px rgba(255,255,255,0.25);
+  .message.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .message {
+      font-size: 15px;
+      line-height: 1.6;
+      padding: 16px;
+    }
+    h1 {
+      font-size: 18px;
+    }
   }
 
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.25);
     border-radius: 3px;
   }
 </style>
@@ -97,12 +90,20 @@
 <canvas id="stars"></canvas>
 <h1>Firuzə üçün mesajlar ✨</h1>
 
-<div class="scroll-wrapper">
-  <div class="scroll-content" id="scrollContent"></div>
+<div class="content" id="messages">
+  <div class="message">İlk olaraq deyim ki çox dolmusan, heç rahat deyilsən.<br><br>Belə olanda özünlə danış, sual ver gör hardadır məsələ.<br><br>İnan ki, sən çox güclü birisən. Hər şeyi bacara bilərsən.<br>O qədər inanıram sənə, səndə özünə inan.</div>
+
+  <div class="message">Bir qram da olsa nəyəsə pis olmağın, kiməsə pis olmağın istəyəcəyim son şeydir.<br><br>Sən çox həyat dolu bir insansan, həqiqətən də.<br>Sakit olduğun müddətcə bir o qədər də insanı rahatladırsan.</div>
+
+  <div class="message">Sən bir pişiyi ayağı ilə itələdiyi üçün 2 gün ağlında qalan insansan.<br><br>Yəni, Allah haqqı, bu elədiklərinə, düşüncə tərzinə bəzən dilim, ağzım söz tutmur cavab verməyə.</div>
+
+  <div class="message">Sən hər şeyin ən yaxşısına layiqsən.</div>
+
+  <div class="message">Bir də hər şeydən önəmli — sənsən.</div>
 </div>
 
 <script>
-// Ulduz animasiyası (qaranlıq galaktika fonu)
+// Qaranlıq galaktika ulduz animasiyası
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
@@ -154,22 +155,17 @@ window.addEventListener('resize',()=>{
 initStars();
 animateStars();
 
-// Firuzə üçün mesajlar
-const texts = [
-  "İlk olaraq deyim ki çox dolmusan, heç rahat deyilsən.\nBelə olanda özünlə danış, sual ver gör hardadır məsələ.\nİnan ki, sən çox güclü birisən.\nHər şeyi bacara bilərsən.\nO qədər inanıram sənə, səndə özünə inan.",
-  "Bir qram da olsa nəyəsə pis olmağın, kiməsə pis olmağın istəyəcəyim son şeydir.\nSən çox həyat dolu bir insansan, həqiqətən də.\nSakit olduğun müddətcə bir o qədər də insanı rahatladırsan.",
-  "Sən bir pişiyi ayağı ilə itələdiyi üçün 2 gün ağlında qalan insansan.\nYəni, Allah haqqı, bu elədiklərinə, düşüncə tərzinə bəzən dilim, ağzım söz tutmur cavab verməyə.",
-  "Sən hər şeyin ən yaxşısına layiqsən.",
-  "Bir də hər şeydən önəmli — sənsən."
-];
+// Yazıların görünmə animasiyası (scroll effekti)
+const messages = document.querySelectorAll('.message');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.3 });
 
-const container = document.getElementById('scrollContent');
-texts.forEach(t => {
-  const box = document.createElement('div');
-  box.className = 'box';
-  box.textContent = t;
-  container.appendChild(box);
-});
+messages.forEach(msg => observer.observe(msg));
 </script>
 </body>
 </html>
