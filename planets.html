@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Qaranlıq Galaktika Scroll</title>
+<title>Qaranlıq Galaktika - Firuzə üçün</title>
 <style>
   html, body {
     margin: 0;
@@ -11,7 +11,7 @@
     overflow: hidden;
     font-family: 'Inter', sans-serif;
     color: #fff;
-    background: #000010; /* Tam qaralığı təmin edir */
+    background: #000010;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,16 +31,18 @@
     text-align:center;
     font-size:20px;
     z-index:2;
+    color:#f5f5ff;
+    letter-spacing:1px;
   }
 
   .scroll-wrapper {
     position: relative;
-    width: 320px;
-    height: 320px;
+    width: 340px;
+    height: 340px;
     overflow-y: scroll;
     border: 2px solid rgba(255,255,255,0.15);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -48,6 +50,8 @@
     scroll-behavior: smooth;
     margin: auto;
     z-index: 2;
+    background: rgba(255,255,255,0.03);
+    box-shadow: 0 0 25px rgba(255,255,255,0.1);
   }
 
   .scroll-content {
@@ -55,22 +59,22 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    padding: 10px 0;
+    padding: 15px 0;
   }
 
   .box {
-    width: 260px;
-    height: 80px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 12px;
+    width: 270px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
-    padding: 10px;
-    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    line-height: 1.5;
+    padding: 15px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.08);
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
@@ -78,17 +82,26 @@
     transform: scale(1.05);
     box-shadow: 0 0 25px rgba(255,255,255,0.25);
   }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+  }
 </style>
 </head>
 <body>
 <canvas id="stars"></canvas>
-<h1>Qaranlıq Galaktikada Scroll Qutular</h1>
+<h1>Bura səninçündür ✨</h1>
+
 <div class="scroll-wrapper">
   <div class="scroll-content" id="scrollContent"></div>
 </div>
 
 <script>
-// Dinamik ulduz fonu
+// Qaranlıq galaktika ulduz animasiyası
 const canvas = document.getElementById('stars');
 const ctx = canvas.getContext('2d');
 let w = canvas.width = window.innerWidth;
@@ -98,9 +111,7 @@ let stars = [];
 function rand(min,max){ return Math.random()*(max-min)+min; }
 
 class Star{
-  constructor(){
-    this.reset();
-  }
+  constructor(){ this.reset(); }
   reset(){
     this.x = rand(0,w);
     this.y = rand(0,h);
@@ -127,7 +138,7 @@ function initStars(){
 }
 
 function animateStars(){
-  ctx.fillStyle = "#000010"; // tam qara fon
+  ctx.fillStyle = "#000010";
   ctx.fillRect(0,0,w,h);
   for(let s of stars){ s.update(); s.draw(); }
   requestAnimationFrame(animateStars);
@@ -142,13 +153,13 @@ window.addEventListener('resize',()=>{
 initStars();
 animateStars();
 
-//Bura sənin üçündür
+// Firuzə üçün 
 const texts = [
-  "İlk olaraq deyim ki çox dolmusan heç rahat deyilsən.Belə olanda özünlə danış sual ver gör hardadır məsələ.İnan ki sən çox güclü birisən.Hər şeyi bacara bilərsən o qədər inanıram sənə səndə özünə inan. ",
-  "Bir qramda olsa nəyəsə pis olmağın kiməsə pis olmağın istəyəcəyim son şeydir.Sən çox həyat dolu bir insansan həqiqətən də.sakit olduğun müddətcədə bir o qədər də insanı rahatladır",
-  "Sən bir pişiyi ayağı  ilə itələdiyi üçün 2 gün ağlında qalan insansan yəni allah haqqı bu elədiklərinə düşüncə tərzinə bəzən dilim ağzım söz tutmur cavab verməyə.",
+  "İlk olaraq deyim ki çox dolmusan, heç rahat deyilsən. Belə olanda özünlə danış, sual ver gör hardadır məsələ. İnan ki, sən çox güclü birisən. Hər şeyi bacara bilərsən. O qədər inanıram sənə, səndə özünə inan.",
+  "Bir qram da olsa nəyəsə pis olmağın, kiməsə pis olmağın istəyəcəyim son şeydir. Sən çox həyat dolu bir insansan, həqiqətən də. Sakit olduğun müddətcə bir o qədər də insanı rahatladırsan.",
+  "Sən bir pişiyi ayağı ilə itələdiyi üçün 2 gün ağlında qalan insansan. Yəni, Allah haqqı, bu elədiklərinə, düşüncə tərzinə bəzən dilim, ağzım söz tutmur cavab verməyə.",
   "Sən hər şeyin ən yaxşısına layiqsən.",
-  "Birdə hər şeydən önəmli sənsən."
+  "Bir də hər şeydən önəmli sənsən."
 ];
 
 const container = document.getElementById('scrollContent');
