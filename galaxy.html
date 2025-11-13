@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="az">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Galaktik Səfər</title>
+  <style>
+    html,body{margin:0;height:100%;background:#020214;overflow:hidden}
+    canvas{position:fixed;inset:0;z-index:0;display:block}
+    .message{
+      position:absolute;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);
+      color:#fff;font-family:'Inter',sans-serif;text-align:center;
+      animation:fadeIn 2s ease forwards;
+    }
+    .message h1{font-size:26px;margin:0 0 10px;}
+    .message p{font-size:14px;color:rgba(255,255,255,0.7);margin:0;}
+    @keyframes fadeIn{from{opacity:0;transform:translate(-50%,-60%);}to{opacity:1;transform:translate(-50%,-50%);}}
+  </style>
+</head>
+<body>
+  <canvas id="galaxy"></canvas>
+  <div class="message">
+    <h1>Galaktik dünyaya xoş gəldin ✨</h1>
+    <p>Bura sənnin gözlərində görmədiyin kimidir...</p>
+    <p><a href="planets.html"> Gülümsə →</a></p>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById("galaxy");
+    const ctx = canvas.getContext("2d");
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
+    const stars = [];
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+
+    class Star {
+      constructor() {
+        this.x = rand(0, w);
+        this.y = rand(0, h);
+        this.size = rand(0.5, 2);
+        this.alpha = 0;
+        this.fadeSpeed = rand(0.002, 0.01);
+        this.dir = 1;
+      }
+      update() {
+        this.alpha += this.fadeSpeed * this.dir;
+        if (this.alpha >= 1) this.dir = -1;
+        if (this.alpha <= 0) {
+          this.x = rand(0, w);
+          this.y = rand(0, h);
+          this.dir = 1;
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${this.alpha})`;
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 200; i++) stars.push(new Star());
+
+    function animate() {
+      ctx.fillStyle = "rgba(2,2,18,0.3)";
+      ctx.fillRect(0, 0, w, h);
+      for (let s of stars) { s.update(); s.draw(); }
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener("resize", () => {
+      w = canvas.width = innerWidth;
+      h = canvas.height = innerHeight;
+    });
+
+    animate();
+    
+  </script>
+</body>
+</html>
